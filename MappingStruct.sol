@@ -37,14 +37,14 @@ contract MappingStructContract {
   function withdrawAll(address payable _to) public {
     uint balanceToSend = accountBalances[msg.sender].totalBalance;
     require(balanceToSend > 0, "Withdraw denied.");
-    _to.transfer(balanceToSend);
     accountBalances[msg.sender].totalBalance = 0;
+    _to.transfer(balanceToSend);
   }
 
   function withdraw(address payable _to, uint _balanceToSend) public {
     uint remainingBalance = accountBalances[msg.sender].totalBalance;
     require(remainingBalance >= _balanceToSend, "Not enough funds.");
-    _to.transfer(_balanceToSend);
     accountBalances[msg.sender].totalBalance -= _balanceToSend;
+    _to.transfer(_balanceToSend);
   }
 }
